@@ -19,7 +19,6 @@ struct ListRowView: View {
                 .cornerRadius(50)
             Text(name)
                 .font(.headline)
-                
             Spacer()
         }
     }
