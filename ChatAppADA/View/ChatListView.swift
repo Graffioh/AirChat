@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ChatListView: View {
-    @EnvironmentObject var chatVM: ChatViewModel
+    @StateObject var chatVM: ChatViewModel
     
     var body: some View {
         NavigationView {
             List{
                 ForEach(chatVM.chats, id : \.id) { chat in
                     NavigationLink{
-                        ChatView(chatId: chat.id).environmentObject(chatVM) // Passing the chat id to get the messages of that specific chat
+                        ChatView(chatVM: chatVM, chatId: chat.id)
+                        // Passing the chat id to get the messages of that specific chat
                     } label: {
                         Text(chat.name)
                     }
@@ -26,9 +27,9 @@ struct ChatListView: View {
 }
 
 
-//struct ChatListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChatListView()
-//            .environmentObject(ChatViewModel())
-//    }
-//}
+struct ChatListView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChatListView(chatVM: ChatViewModel())
+            
+    }
+}

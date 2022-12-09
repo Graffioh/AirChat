@@ -16,7 +16,7 @@ struct ListRowView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
-                .cornerRadius(20)
+                .cornerRadius(50)
             Text(name)
                 .font(.headline)
                 

@@ -27,7 +27,7 @@ struct ContentView: View {
                 
                 List(filteredPeople){ person in
                     if !person.picked{
-                        NavigationLink(destination: MessageView()) {
+                        NavigationLink(destination: MessageView(user: person)) {
                             ListRowView(name: person.fullName)
                         }
                     }
@@ -35,7 +35,7 @@ struct ContentView: View {
                     .listStyle(.plain)
                 
                 
-                NavigationLink(destination: ChatListView().environmentObject(chatVM)) {
+                NavigationLink(destination: ChatListView(chatVM: chatVM)) {
                     Text("Chat list")
                 }
                 
