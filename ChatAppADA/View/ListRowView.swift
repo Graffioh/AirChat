@@ -12,7 +12,7 @@ struct ListRowView: View {
     var name: String
     var body: some View {
         HStack {
-            Image("testimage")
+            Image("image1")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
