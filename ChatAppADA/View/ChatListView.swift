@@ -21,6 +21,14 @@ struct ChatListView: View {
                     }
                 }
             }
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    chatVM.addNewChat()
+                } label: {
+                    Text("Add chat")
+                }
+            }
         }
     }
 }

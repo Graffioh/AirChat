@@ -98,6 +98,16 @@ class ChatViewModel : ObservableObject {
             }
         }
     }
+    
+    // This will create a new chat and when a message is written inside create automatically the subcollection "messages" on firebase
+    func addNewChat(){
+        do{
+            let newChat = Chat(id: "\(UUID())", name: "chat\(chats.count + 1)")
+            try db.collection("chatsTry1").document(newChat.id).setData(from: newChat)
+        } catch{
+            print("error while adding")
+        }
+    }
 }
 
 
