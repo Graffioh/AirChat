@@ -17,4 +17,6 @@ struct Message: Codable, Identifiable {
     var body : String
     var received : Bool
     var timestamp : Date
+    var sender : String
+    var receiver : String
 }

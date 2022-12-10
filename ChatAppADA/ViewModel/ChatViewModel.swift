@@ -10,8 +10,16 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//Testing
+
+struct ChatTest : Codable, Identifiable{
+    var id : String
+    var users : [User]
+    var content : [Message]
+}
+
 class ChatViewModel : ObservableObject {
-    @Published private(set) var chats : [Chat] = []
+    @Published private(set) var chats : [ChatTest] = []
     @Published private(set) var chatMessages : [Message] = []
     
     let db  = Firestore.firestore()
@@ -20,19 +28,29 @@ class ChatViewModel : ObservableObject {
         self.getChats()
     }
     
+    func addChat(users : [User]){
+        let id = UUID()
+        do{
+            let newChat = ChatTest(id: "\(id)", users: users, content: [])
+            try db.collection("chats").document("\(id)").setData(from : newChat)
+        } catch{
+            print("error while adding")
+        }
+    }
+    
     // WIP (Chats)
     func getChats(){
         // Snapshot listener to get realtime updates from firebase
-        db.collection("chatsTry1").addSnapshotListener { query, err in
+        db.collection("chats").addSnapshotListener { query, err in
             guard let chats = query?.documents else {
                 print(err!)
                 return
             }
             
             // Getting chat infos from firebase to chat array (id, name)
-            self.chats = chats.compactMap { document -> Chat? in
+            self.chats = chats.compactMap { document -> ChatTest? in
                 do{
-                    return try document.data(as : Chat.self)
+                    return try document.data(as : ChatTest.self)
                 }catch{
                     print("error while downloading")
                     return nil
@@ -42,7 +60,7 @@ class ChatViewModel : ObservableObject {
     }
     
     func getChatMessages(chatId: String) {
-        db.collection("chatsTry1").document(chatId).collection("messages").addSnapshotListener { query, err in
+        db.collection("chats").document(chatId).collection("messages").addSnapshotListener { query, err in
             guard let documents = query?.documents else {
                 print(err!)
                 return
@@ -61,12 +79,12 @@ class ChatViewModel : ObservableObject {
         }
     }
     
-    func addChatMessages(text : String, chatId: String){
+    func addChatMessages(text : String, chatId: String, sender : String, receiver : String){
         do{
             // Instantiation of a new message
-            let newMess = Message(id: "\(UUID())", body: text, received: false, timestamp: Date())
+            let newMess = Message(id: "\(UUID())", body: text, received: false, timestamp: Date(), sender : sender, receiver : receiver)
             // setData method to add the new message inside the document specified
-            try db.collection("chatsTry1").document(chatId).collection("messages").document().setData(from : newMess)
+            try db.collection("chats").document(chatId).collection("messages").document(newMess.id).setData(from : newMess)
         } catch{
             print("error while adding")
         }
@@ -79,7 +97,7 @@ class ChatViewModel : ObservableObject {
         let deleteAllBatch: WriteBatch = self.db.batch()
         
         // First delete all messages
-        db.collection("chatsTry1").document(chatId).collection("messages").getDocuments() { (docSnapshot, err) in
+        db.collection("chats").document(chatId).collection("messages").getDocuments() { (docSnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -95,6 +113,26 @@ class ChatViewModel : ObservableObject {
                         print("Batch write succeeded")
                     }
                 }
+            }
+        }
+    }
+    
+    // This will create a new chat and when a message is written inside create automatically the subcollection "messages" on firebase
+    func addNewChat(){
+        do{
+            let newChat = Chat(id: "\(UUID())", name: "chat\(chats.count + 1)")
+            try db.collection("chatsTry1").document(newChat.id).setData(from: newChat)
+        } catch{
+            print("error while adding")
+        }
+    }
+    
+    func deleteMessage(chatId: String, msgId: String){
+        db.collection("chats").document(chatId).collection("messages").document(msgId).delete() { err in
+            if let err = err {
+                print("error while deleting message: \(err)")
+            } else {
+                print("message delete success")
             }
         }
     }

@@ -25,7 +25,7 @@ struct MessageView: View {
 
             ScrollView(showsIndicators: false) {
                 ForEach(dbManager.messages, id : \.id) { message in
-                    MessageRowView(message: message)
+//                    MessageRowView(message: message, sender : message.sender)
                 }
             }
             .toolbar(content: {
@@ -54,10 +54,6 @@ struct MessageView: View {
         }
         .navigationTitle(user.fullName)
         .navigationBarTitleDisplayMode(.inline)
-    }
-    
-    func prova() {
-        
     }
 }
 
