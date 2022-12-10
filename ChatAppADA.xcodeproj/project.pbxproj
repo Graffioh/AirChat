@@ -24,6 +24,8 @@
 		0694FD74294334400056CE17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0694FD73294334400056CE17 /* GoogleService-Info.plist */; };
 		0694FD76294334C10056CE17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694FD75294334C10056CE17 /* ContentView.swift */; };
 		7D3D78652943402300F34035 /* TextfieldRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D78642943402300F34035 /* TextfieldRowView.swift */; };
+		7D3D786729448B2800F34035 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786629448B2800F34035 /* CameraModel.swift */; };
+		7D3D786A29448E5300F34035 /* CameraRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786929448E5300F34035 /* CameraRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,9 @@
 		0694FD73294334400056CE17 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0694FD75294334C10056CE17 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D3D78642943402300F34035 /* TextfieldRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextfieldRowView.swift; path = ../../../../Documents/TextfieldRowView.swift; sourceTree = "<group>"; };
+		7D3D786629448B2800F34035 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		7D3D786829448D9300F34035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7D3D786929448E5300F34035 /* CameraRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				064462E6294334F700B59C61 /* UserModel.swift */,
+				7D3D786629448B2800F34035 /* CameraModel.swift */,
 				064462E8294334FF00B59C61 /* ChatModel.swift */,
 			);
 			path = Model;
@@ -84,6 +90,7 @@
 				7D3D78642943402300F34035 /* TextfieldRowView.swift */,
 				064462F02943351100B59C61 /* MessageRowView.swift */,
 				064462F22943351400B59C61 /* ListRowView.swift */,
+				7D3D786929448E5300F34035 /* CameraRowView.swift */,
 				064462F42943351800B59C61 /* ChatView.swift */,
 				064462F62943351C00B59C61 /* ChatListView.swift */,
 			);
@@ -109,6 +116,7 @@
 		0694FD53294331B90056CE17 /* ChatAppADA */ = {
 			isa = PBXGroup;
 			children = (
+				7D3D786829448D9300F34035 /* Info.plist */,
 				0694FD73294334400056CE17 /* GoogleService-Info.plist */,
 				0694FD662943329B0056CE17 /* ChatAppADAApp.swift */,
 				064462FA2943368A00B59C61 /* View */,
@@ -206,9 +214,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D3D786729448B2800F34035 /* CameraModel.swift in Sources */,
 				064462F72943351C00B59C61 /* ChatListView.swift in Sources */,
 				064462EB2943350600B59C61 /* DbManager.swift in Sources */,
 				064462E7294334F700B59C61 /* UserModel.swift in Sources */,
+				7D3D786A29448E5300F34035 /* CameraRowView.swift in Sources */,
 				064462F52943351900B59C61 /* ChatView.swift in Sources */,
 				0694FD76294334C10056CE17 /* ContentView.swift in Sources */,
 				0694FD672943329B0056CE17 /* ChatAppADAApp.swift in Sources */,
@@ -346,9 +356,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ChatAppADA/Preview Content\"";
-				DEVELOPMENT_TEAM = R8T7YU6S4Z;
+				DEVELOPMENT_TEAM = 4TP9VJ2S7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChatAppADA/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "access to the camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -359,7 +372,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "self.chat-app-ada";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChatAppAda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -375,9 +388,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ChatAppADA/Preview Content\"";
-				DEVELOPMENT_TEAM = R8T7YU6S4Z;
+				DEVELOPMENT_TEAM = 4TP9VJ2S7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChatAppADA/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "access to the camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -388,7 +404,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "self.chat-app-ada";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChatAppAda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
