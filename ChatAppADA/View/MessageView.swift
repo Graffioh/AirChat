@@ -24,24 +24,11 @@ struct MessageView: View {
 
             ScrollView {
                 ForEach(dbManager.messages, id : \.id) { message in
-                    MessageRowView(message: message)
+                    MessageRowView(message: message, sender : message.sender)
                 }
             }
             .padding()
-            
-            HStack{
-                TextField("test", text: $input)
-                    .padding()
-                    .foregroundColor(.secondary)
-                
-                Button {
-                    dbManager.addMessages(text: input)
-                    input = ""
-                } label: {
-                    Image(systemName: "airplane")
-                }
-
-            }
+           
         }
     }
 }

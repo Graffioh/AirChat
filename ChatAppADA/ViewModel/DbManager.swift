@@ -21,26 +21,6 @@ class DbManager : ObservableObject {
     }
     
     func populate() {
-
-        db.collection("messages").addSnapshotListener { query, err in
-            guard let documents = query?.documents else {
-                print(err!)
-                return
-            }
-            
-            self.messages = documents.compactMap { document -> Message? in
-                do{
-                    return try document.data(as : Message.self)
-                }catch{
-
-                    print("error while downloading messages")
-
-                    return nil
-                }
-            }
-            self.messages.sort { $0.timestamp < $1.timestamp }
-        }
-
         db.collection("users").addSnapshotListener { query, err in
             guard let documents = query?.documents else {
                 print(err!)
@@ -58,17 +38,7 @@ class DbManager : ObservableObject {
             self.users.sort { $0.fullName < $1.fullName }
         }
     }
-    
-    func addMessages(text : String){
-        do{
 
-            let newMess = Message(id: "\(UUID())", body: text, received: false, timestamp: Date()) // Instantiation of a new message
-            try db.collection("messages").document().setData(from : newMess) // simple setData method to add the new message
-        } catch{
-            print("error while adding")
-        }
-    }
-    
     func deleteAllMessages(){
         // Single delete
 //        db.collection("messages").document("\(document_name)").delete() { err in

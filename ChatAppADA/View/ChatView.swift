@@ -10,6 +10,8 @@ import SwiftUI
 struct ChatView: View {
     @EnvironmentObject var chatVM: ChatViewModel
     @State var input = ""
+    var sender : String
+    var receiver : String
     
     var chatId: String
     
@@ -17,8 +19,7 @@ struct ChatView: View {
         VStack(alignment: .center){
             // Messages
             ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
-                Text(chatMessage.body)
-                    .onLongPressGesture(minimumDuration: 1.5, perform: {chatVM.deleteMessage(chatId: chatId, msgId: chatMessage.id)})
+                MessageRowView(message: chatMessage, sender : sender)
             }
             .padding()
             
@@ -26,7 +27,7 @@ struct ChatView: View {
             HStack{
                 TextField("test", text: $input)
                 Button {
-                    chatVM.addChatMessages(text: input, chatId: chatId)
+                    chatVM.addChatMessages(text: input, chatId: chatId, sender : sender, receiver : receiver)
                     input = ""
                 } label: {
                     Image(systemName: "airplane")

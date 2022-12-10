@@ -11,17 +11,19 @@ struct MessageRowView: View {
     
     var message: Message
     @State private var showTime = false
+    var sender : String
     
     var body: some View {
-        VStack(alignment: message.received ? .leading : .trailing) {
+        
+        VStack(alignment: (sender != message.sender) ? .leading : .trailing) {
             HStack {
                 Text(message.body)
                     .foregroundColor(.white)
                     .padding()
-                    .background(message.received ? Color.secondary : .blue)
+                    .background((sender != message.sender) ? Color.secondary : .blue)
                     .cornerRadius(20)
             }
-            .frame(maxWidth: 300, alignment: message.received ? .leading : .trailing)
+            .frame(maxWidth: 300, alignment: (sender != message.sender) ? .leading : .trailing)
             .onTapGesture {
                 showTime.toggle()
             }
@@ -29,11 +31,11 @@ struct MessageRowView: View {
                 Text("\(message.timestamp.formatted(.dateTime.hour().minute()))")
                     .font(.caption2)
                     .foregroundColor(.secondary)
-                    .padding(message.received ? .leading : .trailing, 10)
+                    .padding((sender != message.sender) ? .leading : .trailing, 10)
             }
             
         }
-        .frame(maxWidth: .infinity, alignment: message.received ? .leading : .trailing)
+        .frame(maxWidth: .infinity, alignment: (sender == message.sender) ? .leading : .trailing)
 //        .padding(message.received ? .leading : .trailing)
         
     }
@@ -41,6 +43,6 @@ struct MessageRowView: View {
 
 struct MessageRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageRowView(message: Message(id: "12345", body: "First message", received: false, timestamp: Date()))
+        MessageRowView(message: Message(id: "12345", body: "First message", received: false, timestamp: Date(), sender : "sss", receiver : "sss"), sender : "SSS")
     }
 }
