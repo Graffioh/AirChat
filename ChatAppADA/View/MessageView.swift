@@ -24,7 +24,7 @@ struct MessageView: View {
 
             ScrollView {
                 ForEach(dbManager.messages, id : \.id) { message in
-                    MessageRowView(message: message, sender : message.sender)
+//                    MessageRowView(message: message, sender : message.sender)
                 }
             }
             .padding()

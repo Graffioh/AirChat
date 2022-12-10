@@ -128,7 +128,7 @@ class ChatViewModel : ObservableObject {
     }
     
     func deleteMessage(chatId: String, msgId: String){
-        db.collection("chatsTry1").document(chatId).collection("messages").document(msgId).delete() { err in
+        db.collection("chats").document(chatId).collection("messages").document(msgId).delete() { err in
             if let err = err {
                 print("error while deleting message: \(err)")
             } else {
