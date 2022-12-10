@@ -23,7 +23,6 @@
 		0694FD72294333BD0056CE17 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0694FD71294333BD0056CE17 /* FirebaseFirestoreSwift */; };
 		0694FD74294334400056CE17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0694FD73294334400056CE17 /* GoogleService-Info.plist */; };
 		0694FD76294334C10056CE17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694FD75294334C10056CE17 /* ContentView.swift */; };
-		7D3D78652943402300F34035 /* TextfieldRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D78642943402300F34035 /* TextfieldRowView.swift */; };
 		7D3D786729448B2800F34035 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786629448B2800F34035 /* CameraModel.swift */; };
 		7D3D786A29448E5300F34035 /* CameraRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786929448E5300F34035 /* CameraRowView.swift */; };
 /* End PBXBuildFile section */
@@ -44,7 +43,6 @@
 		0694FD662943329B0056CE17 /* ChatAppADAApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAppADAApp.swift; sourceTree = "<group>"; };
 		0694FD73294334400056CE17 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0694FD75294334C10056CE17 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7D3D78642943402300F34035 /* TextfieldRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextfieldRowView.swift; path = ../../../../Documents/TextfieldRowView.swift; sourceTree = "<group>"; };
 		7D3D786629448B2800F34035 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		7D3D786829448D9300F34035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7D3D786929448E5300F34035 /* CameraRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraRowView.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				0694FD75294334C10056CE17 /* ContentView.swift */,
 				064462EE2943350E00B59C61 /* MessageView.swift */,
-				7D3D78642943402300F34035 /* TextfieldRowView.swift */,
 				064462F02943351100B59C61 /* MessageRowView.swift */,
 				064462F22943351400B59C61 /* ListRowView.swift */,
 				7D3D786929448E5300F34035 /* CameraRowView.swift */,
@@ -227,7 +224,6 @@
 				064462E92943350000B59C61 /* ChatModel.swift in Sources */,
 				064462F12943351100B59C61 /* MessageRowView.swift in Sources */,
 				064462F32943351500B59C61 /* ListRowView.swift in Sources */,
-				7D3D78652943402300F34035 /* TextfieldRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,7 +50,7 @@ struct MessageView: View {
             })
             .padding(.horizontal)
             
-            TextfieldRowView()
+            //TextfieldRowView() manca il file su github
         }
         .navigationTitle(user.fullName)
         .navigationBarTitleDisplayMode(.inline)
