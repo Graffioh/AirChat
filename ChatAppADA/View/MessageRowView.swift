@@ -9,15 +9,18 @@ import SwiftUI
 
 struct MessageRowView: View {
     
+    @EnvironmentObject var chatVM: ChatViewModel
     var message: Message
     @State private var showTime = false
     var sender : String
+    var chatId: String
     
     var body: some View {
         
         VStack(alignment: (sender != message.sender) ? .leading : .trailing) {
             HStack {
                 Text(message.body)
+                    .onLongPressGesture(minimumDuration: 1.5, perform: {chatVM.deleteMessage(chatId: chatId, msgId: message.id)})
                     .foregroundColor(.white)
                     .padding()
                     .background((sender != message.sender) ? Color.secondary : .blue)
@@ -41,8 +44,8 @@ struct MessageRowView: View {
     }
 }
 
-struct MessageRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        MessageRowView(message: Message(id: "12345", body: "First message", received: false, timestamp: Date(), sender : "sss", receiver : "sss"), sender : "SSS")
-    }
-}
+//struct MessageRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MessageRowView(message: Message(id: "12345", body: "First message", received: false, timestamp: Date(), sender : "sss", receiver : "sss"), sender : "SSS")
+//    }
+//}

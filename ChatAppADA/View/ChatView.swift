@@ -19,7 +19,7 @@ struct ChatView: View {
         VStack(alignment: .center){
             // Messages
             ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
-                MessageRowView(message: chatMessage, sender : sender)
+                MessageRowView(message: chatMessage, sender : sender, chatId: chatId).environmentObject(chatVM)
             }
             .padding()
             
