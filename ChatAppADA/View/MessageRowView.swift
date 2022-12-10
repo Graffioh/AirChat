@@ -44,6 +44,7 @@ struct MessageRowView: View {
     }
 }
 
+
 //struct MessageRowView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MessageRowView(message: Message(id: "12345", body: "First message", received: false, timestamp: Date(), sender : "sss", receiver : "sss"), sender : "SSS")

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChatListView: View {
+
     @EnvironmentObject var chatVM: ChatViewModel
     let user : User
     
@@ -31,9 +32,9 @@ struct ChatListView: View {
 }
 
 
-//struct ChatListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChatListView()
-//            .environmentObject(ChatViewModel())
-//    }
-//}
+struct ChatListView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChatListView(chatVM: ChatViewModel())
+            
+    }
+}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatView: View {
-    @EnvironmentObject var chatVM: ChatViewModel
+    @StateObject var chatVM: ChatViewModel
     @State var input = ""
     var sender : String
     var receiver : String
@@ -49,9 +49,9 @@ struct ChatView: View {
     }
 }
 
-//struct ChatView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChatView(chatId: String)
-//            .environmentObject(DbManager())
-//    }
-//}
+struct ChatView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChatView(chatVM: ChatViewModel(), chatId: "ciao")
+            
+    }
+}
