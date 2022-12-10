@@ -10,7 +10,10 @@ import SwiftUI
 struct ContentView: View {    
     @StateObject var dbManager = DbManager()
     @StateObject var chatVM = ChatViewModel()
+    //@State var user : User = User(id: "6B38B654-5FBF-4D02-8C3F-38606B4E9DC2", fullName: "Alessandro Vinaccia", picked: true)
+    @State var user : User = User(id: "E850B250-D341-4ABF-8370-D33B480CE506", fullName: "Umberto Breglia", picked: true)
     @State private var searchInput = ""
+    @State var showingModal = false
     
     
     var filteredPeople : [User] {
@@ -24,30 +27,45 @@ struct ContentView: View {
         NavigationStack {
             
             VStack(alignment: .center){
-                
-                List(filteredPeople){ person in
-                    if !person.picked{
-                        NavigationLink(destination: MessageView()) {
-                            ListRowView(name: person.fullName)
+                ChatListView(user : user).environmentObject(chatVM)
+            }.navigationTitle("ChatApp")
+                .toolbar {
+                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
+                        Button {
+                            
+                        } label: {
+                            Text("Edit")
+                        }
+                        
+                    }
+                    ToolbarItemGroup(placement : ToolbarItemPlacement.navigationBarTrailing){
+                        Button {
+                            self.showingModal = true
+                        } label: {
+                            Image(systemName: "plus")
                         }
                     }
-                }.searchable(text: $searchInput)
-                    .listStyle(.plain)
-                
-                
-                NavigationLink(destination: ChatListView().environmentObject(chatVM)) {
-                    Text("Chat list")
+                }.sheet(isPresented: $showingModal) {
+                    List(filteredPeople){ person in
+                        if person.id != user.id {
+                            Button {
+                                print(person.id)
+                                chatVM.addChat(users: [user, person])
+                                self.showingModal = false
+                            } label: {
+                                ListRowView(name: person.fullName)
+                            }
+                        }
+                        }.searchable(text: $searchInput)
                 }
-                
-
-            }.navigationTitle("ChatApp")
+            
+            
         }
-        
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+        }
     }
 }

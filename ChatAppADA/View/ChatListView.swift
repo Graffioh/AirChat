@@ -9,15 +9,20 @@ import SwiftUI
 
 struct ChatListView: View {
     @EnvironmentObject var chatVM: ChatViewModel
+    let user : User
     
     var body: some View {
+        
         NavigationView {
             List{
                 ForEach(chatVM.chats, id : \.id) { chat in
-                    NavigationLink{
-                        ChatView(chatId: chat.id).environmentObject(chatVM) // Passing the chat id to get the messages of that specific chat
-                    } label: {
-                        Text(chat.name)
+                    if chat.users.first(where: {$0.id == user.id}) != nil{
+                        let receiver = chat.users.first(where : { $0.id != self.user.id })!
+                        NavigationLink{
+                            ChatView(sender : self.user.id, receiver : receiver.id, chatId: chat.id).environmentObject(chatVM) // Passing the chat id to get the messages of that specific chat
+                        } label: {
+                            Text(receiver.fullName)
+                        }
                     }
                 }
             }
