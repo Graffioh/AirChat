@@ -1,57 +1,63 @@
 //
-//  ChatView.swift
+//  MessageView.swift
 //  chat-app-ada
 //
-//  Created by Umberto Breglia on 08/12/22.
+//  Created by Giovanni Michele on 08/12/22.
 //
 
 import SwiftUI
 
 struct ChatView: View {
-    @StateObject var chatVM: ChatViewModel
+    @EnvironmentObject var chatVM: ChatViewModel
     @State var input = ""
     var sender : String
-    var receiver : String
+    var receiver : User
     
     var chatId: String
     
     var body: some View {
-        VStack(alignment: .center){
-            // Messages
-            ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
-                MessageRowView(message: chatMessage, sender : sender, chatId: chatId).environmentObject(chatVM)
-            }
-            .padding()
+        VStack {
+            ScrollView(showsIndicators: false) {
+                ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
+                    MessageBubble(message: chatMessage, sender : sender, chatId: chatId).environmentObject(chatVM)
+                }
+                .padding()
+            }.toolbar(content: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        //Button("Reset", action: prova)
+                        
+                        Button {
+                            chatVM.deleteAllChatMessages(chatId: chatId)
+                        } label: {
+                            HStack {
+                                Image(systemName: "trash.fill")
+                                Text("Delete all messages")
+                            }
+                        }
+
+                    }                                                          label: {
+                        Label("Add Item", systemImage: "ellipsis.circle")
+                    }
+                }
+            })
+            .padding(.horizontal)
             
-            // Input text field
+            //TextfieldRowView() manca il file su github
             HStack{
                 TextField("test", text: $input)
                 Button {
-                    chatVM.addChatMessages(text: input, chatId: chatId, sender : sender, receiver : receiver)
+                    chatVM.addChatMessages(text: input, chatId: chatId, sender : sender, receiver : receiver.id)
                     input = ""
                 } label: {
                     Image(systemName: "airplane")
                 }
             }
-            // Delete messages button
-            Button {
-                chatVM.deleteAllChatMessages(chatId: chatId)
-            } label: {
-                Text("Delete all chat messages")
-                    .bold()
-                    .foregroundColor(.red)
-            }
-            .padding()
         }.onAppear{
             chatVM.getChatMessages(chatId: chatId) // On appear get specific chat messages
             print("chat id: \(chatId)")
         }
-    }
-}
-
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView(chatVM: ChatViewModel(), chatId: "ciao")
-            
+        .navigationTitle(receiver.fullName)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

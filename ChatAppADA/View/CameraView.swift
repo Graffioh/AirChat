@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CameraRowView: View {
+struct CameraView: View {
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
@@ -54,8 +54,4 @@ struct CameraRowView: View {
     }
 }
 
-struct CameraRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraRowView()
-    }
-}
+

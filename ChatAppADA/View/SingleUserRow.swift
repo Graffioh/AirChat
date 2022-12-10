@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListRowView: View {
+struct SingleUserRow: View {
     
     var name: String
     var body: some View {
@@ -24,8 +24,4 @@ struct ListRowView: View {
     }
 }
 
-struct ListRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListRowView(name: "Umberto Breglia")
-    }
-}
+

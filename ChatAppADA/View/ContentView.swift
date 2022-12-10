@@ -27,7 +27,16 @@ struct ContentView: View {
         NavigationStack {
             
             VStack(alignment: .center){
-                ChatListView(user : user).environmentObject(chatVM)
+                ForEach(chatVM.chats, id : \.id) { chat in
+                    if chat.users.first(where: {$0.id == user.id}) != nil{
+                        let receiver = chat.users.first(where : { $0.id != self.user.id })!
+                        NavigationLink{
+                            ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
+                        } label: {
+                            SingleUserRow(name: receiver.fullName)
+                        }
+                    }
+                }
             }.navigationTitle("ChatApp")
                 .toolbar {
                     ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
@@ -53,13 +62,11 @@ struct ContentView: View {
                                 chatVM.addChat(users: [user, person])
                                 self.showingModal = false
                             } label: {
-                                ListRowView(name: person.fullName)
+                                SingleUserRow(name: person.fullName)
                             }
                         }
                         }.searchable(text: $searchInput)
                 }
-            
-            
         }
     }
     

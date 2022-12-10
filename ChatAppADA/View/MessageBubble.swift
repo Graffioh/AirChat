@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageRowView: View {
+struct MessageBubble: View {
     
     @EnvironmentObject var chatVM: ChatViewModel
     var message: Message
