@@ -66,7 +66,7 @@ class ChatViewModel : ObservableObject {
             // Instantiation of a new message
             let newMess = Message(id: "\(UUID())", body: text, received: false, timestamp: Date())
             // setData method to add the new message inside the document specified
-            try db.collection("chatsTry1").document(chatId).collection("messages").document().setData(from : newMess)
+            try db.collection("chatsTry1").document(chatId).collection("messages").document(newMess.id).setData(from : newMess)
         } catch{
             print("error while adding")
         }
@@ -106,6 +106,16 @@ class ChatViewModel : ObservableObject {
             try db.collection("chatsTry1").document(newChat.id).setData(from: newChat)
         } catch{
             print("error while adding")
+        }
+    }
+    
+    func deleteMessage(chatId: String, msgId: String){
+        db.collection("chatsTry1").document(chatId).collection("messages").document(msgId).delete() { err in
+            if let err = err {
+                print("error while deleting message: \(err)")
+            } else {
+                print("message delete success")
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ struct ChatView: View {
             // Messages
             ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
                 Text(chatMessage.body)
+                    .onLongPressGesture(minimumDuration: 1.5, perform: {chatVM.deleteMessage(chatId: chatId, msgId: chatMessage.id)})
             }
             .padding()
             
