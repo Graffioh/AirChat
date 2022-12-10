@@ -127,6 +127,7 @@ class ChatViewModel : ObservableObject {
         }
     }
     
+    // Delete single message
     func deleteMessage(chatId: String, msgId: String){
         db.collection("chats").document(chatId).collection("messages").document(msgId).delete() { err in
             if let err = err {
