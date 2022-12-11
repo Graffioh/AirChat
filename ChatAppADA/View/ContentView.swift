@@ -25,11 +25,11 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            
             VStack(alignment: .center){
                 ForEach(chatVM.chats, id : \.id) { chat in
+                    // This basically filter chats based on who is the user that is using the app, so everyone have "personal" chats.
                     if chat.users.first(where: {$0.id == user.id}) != nil{
-                        let receiver = chat.users.first(where : { $0.id != self.user.id })!
+                        let receiver: User = chat.users.first(where : { $0.id != self.user.id })!
                         NavigationLink{
                             ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
                         } label: {
@@ -39,14 +39,13 @@ struct ContentView: View {
                 }
             }.navigationTitle("ChatApp")
                 .toolbar {
-                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
-                        Button {
-                            
-                        } label: {
-                            Text("Edit")
-                        }
-                        
-                    }
+//                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
+//                        Button {
+//
+//                        } label: {
+//                            Text("Edit")
+//                        }
+//                    }
                     ToolbarItemGroup(placement : ToolbarItemPlacement.navigationBarTrailing){
                         Button {
                             self.showingModal = true
@@ -56,7 +55,8 @@ struct ContentView: View {
                     }
                 }.sheet(isPresented: $showingModal) {
                     List(filteredPeople){ person in
-                        if person.id != user.id {
+                        ForEach(chatVM.chats, id : \.id) { chat in
+                        if person.id != user.id && chat.users[1].id != person.id{
                             Button {
                                 print(person.id)
                                 chatVM.addChat(users: [user, person])
@@ -65,14 +65,24 @@ struct ContentView: View {
                                 SingleUserRow(name: person.fullName)
                             }
                         }
-                        }.searchable(text: $searchInput)
-                }
+                    }
+                }.searchable(text: $searchInput)
+            }
         }
+        
     }
+    
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             ContentView()
         }
+    }
+}
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }
