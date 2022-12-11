@@ -55,18 +55,18 @@ struct ContentView: View {
                     }
                 }.sheet(isPresented: $showingModal) {
                     List(filteredPeople){ person in
-                        ForEach(chatVM.chats, id : \.id) { chat in
-                        if person.id != user.id && chat.users[1].id != person.id{
-                            Button {
-                                print(person.id)
-                                chatVM.addChat(users: [user, person])
-                                self.showingModal = false
-                            } label: {
-                                SingleUserRow(name: person.fullName)
+                        if chatVM.chats.first(where: {$0.users.first(where : {$0.id == person.id}) != nil}) == nil{
+                            if person.id != user.id{
+                                Button {
+                                    print(person.id)
+                                    chatVM.addChat(users: [user, person])
+                                    self.showingModal = false
+                                } label: {
+                                    SingleUserRow(name: person.fullName)
+                                }
                             }
-                        }
                     }
-                }.searchable(text: $searchInput)
+                }
             }
         }
         
