@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  chat-app-ada
 //
-//  Created by Alessandro Vinaccia on 07/12/22.
+//  Created by Alessandro i on 07/12/22.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var searchInput = ""
     @State var showingModal = false
     
-    
+    // Filter based on search input
     var filteredPeople : [User] {
         if searchInput == "" { return dbManager.users}
         return dbManager.users.filter {
@@ -37,8 +37,9 @@ struct ContentView: View {
                                 SingleUserRow(name: receiver.fullName)
                             }
                         }
-                    }.onDelete { indexSet in
+                    }.onDelete { indexSet in // Delete chat
                         indexSet.forEach { (i) in
+                            chatVM.deleteAllChatMessages(chatId: chatVM.chats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted (its written in the documentation)
                             chatVM.deleteChat(chatId: chatVM.chats[i].id)
                         }
                     }
@@ -62,7 +63,7 @@ struct ContentView: View {
                     }
                 }.sheet(isPresented: $showingModal) {
                     List(filteredPeople){ person in
-                        // If a user is already picked for a chat, it wont display anymore in the modal view.
+                        // If a user is already picked for a chat, it wont be displayed anymore in the modal view.
                         if chatVM.chats.first(where: {$0.users.first(where: {$0.id == person.id}) != nil}) == nil {
                         if person.id != user.id {
                             Button {

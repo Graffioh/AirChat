@@ -142,7 +142,7 @@ class ChatViewModel : ObservableObject {
             if let err = err {
                 print("error while deleting message: \(err)")
             } else {
-                print("message delete success")
+                print("chat delete success")
             }
         }
     }
