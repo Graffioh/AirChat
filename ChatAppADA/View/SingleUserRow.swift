@@ -24,4 +24,10 @@ struct SingleUserRow: View {
     }
 }
 
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+      SingleUserRow(name: "Gianmichele")
+    }
+}
+
 

@@ -10,11 +10,9 @@ import SwiftUI
 struct ContentView: View {    
     @StateObject var dbManager = DbManager()
     @StateObject var chatVM = ChatViewModel()
-    //@State var user : User = User(id: "6B38B654-5FBF-4D02-8C3F-38606B4E9DC2", fullName: "Alessandro Vinaccia", picked: true)
-    @State var user : User = User(id: "E850B250-D341-4ABF-8370-D33B480CE506", fullName: "Umberto Breglia", picked: true)
     @State private var searchInput = ""
     @State var showingModal = false
-    
+    @State var user : User = User(id: "E850B250-D341-4ABF-8370-D33B480CE506", fullName: "Umberto Breglia", picked: true)
     
     var filteredPeople : [User] {
         if searchInput == "" { return dbManager.users}
@@ -26,24 +24,27 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             
-            VStack(alignment: .center){
+            List {
                 ForEach(chatVM.chats, id : \.id) { chat in
                     if chat.users.first(where: {$0.id == user.id}) != nil{
                         let receiver = chat.users.first(where : { $0.id != self.user.id })!
                         NavigationLink{
-                            ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
+                            ChatView(chatVM: ChatViewModel(), sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
                         } label: {
                             SingleUserRow(name: receiver.fullName)
                         }
                     }
                 }
-            }.navigationTitle("ChatApp")
+            }
+            .searchable(text: $searchInput)
+            .navigationTitle("ChatApp")
+                .listStyle(.plain)
                 .toolbar {
                     ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
                         Button {
                             
                         } label: {
-                            Text("Edit")
+                            EditButton()
                         }
                         
                     }
@@ -55,18 +56,27 @@ struct ContentView: View {
                         }
                     }
                 }.sheet(isPresented: $showingModal) {
-                    List(filteredPeople){ person in
-                        if person.id != user.id {
-                            Button {
-                                print(person.id)
-                                chatVM.addChat(users: [user, person])
-                                self.showingModal = false
-                            } label: {
-                                SingleUserRow(name: person.fullName)
+                    NavigationStack {
+                        List(filteredPeople){ person in
+                            if person.id != user.id {
+                                Button {
+                                    print(person.id)
+                                    chatVM.addChat(users: [user, person])
+                                    self.showingModal = false
+                                } label: {
+                                    SingleUserRow(name: person.fullName)
+                                }
                             }
-                        }
-                        }.searchable(text: $searchInput)
+                                
+                            }
+                        .searchable(text: $searchInput)
+                    .listStyle(.plain)
+                    .navigationTitle("Contacts")
+                    .navigationBarTitleDisplayMode(.inline)
+                    }
+                   
                 }
+                
         }
     }
     

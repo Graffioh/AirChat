@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatView: View {
-    @EnvironmentObject var chatVM: ChatViewModel
+    @StateObject var chatVM: ChatViewModel
     @State var input = ""
     var sender : String
     var receiver : User
@@ -19,7 +19,7 @@ struct ChatView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
-                    MessageBubble(message: chatMessage, sender : sender, chatId: chatId).environmentObject(chatVM)
+                    MessageBubble(chatVM: ChatViewModel(), message: chatMessage, sender : sender, chatId: chatId)
                 }
                 .padding()
             }.toolbar(content: {
@@ -35,24 +35,31 @@ struct ChatView: View {
                                 Text("Delete all messages")
                             }
                         }
-
-                    }                                                          label: {
-                        Label("Add Item", systemImage: "ellipsis.circle")
+                        
                     }
+                label: {
+                    Label("Add Item", systemImage: "ellipsis.circle")
+                }
                 }
             })
             .padding(.horizontal)
             
-            //TextfieldRowView() manca il file su github
+            
             HStack{
-                TextField("test", text: $input)
+                TextfieldRowView(input: $input)
                 Button {
                     chatVM.addChatMessages(text: input, chatId: chatId, sender : sender, receiver : receiver.id)
                     input = ""
                 } label: {
-                    Image(systemName: "airplane")
+                    Image(systemName: "arrow.up").bold()
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(.blue)
+                        .cornerRadius(50)
                 }
             }
+            .padding(.trailing)
+            .padding(.vertical)
         }.onAppear{
             chatVM.getChatMessages(chatId: chatId) // On appear get specific chat messages
             print("chat id: \(chatId)")
@@ -61,3 +68,6 @@ struct ChatView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+
+
