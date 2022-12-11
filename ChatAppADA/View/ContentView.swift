@@ -26,17 +26,24 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .center){
-                ForEach(chatVM.chats, id : \.id) { chat in
-                    // This basically filter chats based on who is the user that is using the app, so everyone have "personal" chats.
-                    if chat.users.first(where: {$0.id == user.id}) != nil{
-                        let receiver: User = chat.users.first(where : { $0.id != self.user.id })!
-                        NavigationLink{
-                            ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
-                        } label: {
-                            SingleUserRow(name: receiver.fullName)
+                List{
+                    ForEach(chatVM.chats, id: \.id) { chat in
+                        // This basically filter chats based on who is the user that is using the app, so everyone have "personal" chats.
+                        if chat.users.first(where: {$0.id == user.id}) != nil{
+                            let receiver: User = chat.users.first(where : { $0.id != self.user.id })!
+                            NavigationLink{
+                                ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
+                            } label: {
+                                SingleUserRow(name: receiver.fullName)
+                            }
+                        }
+                    }.onDelete { indexSet in
+                        indexSet.forEach { (i) in
+                            chatVM.deleteChat(chatId: chatVM.chats[i].id)
                         }
                     }
-                }
+                }.scrollContentBackground(.hidden)
+                    
             }.navigationTitle("ChatApp")
                 .toolbar {
 //                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
@@ -55,8 +62,9 @@ struct ContentView: View {
                     }
                 }.sheet(isPresented: $showingModal) {
                     List(filteredPeople){ person in
-                        ForEach(chatVM.chats, id : \.id) { chat in
-                        if person.id != user.id && chat.users[1].id != person.id{
+                        // If a user is already picked for a chat, it wont display anymore in the modal view.
+                        if chatVM.chats.first(where: {$0.users.first(where: {$0.id == person.id}) != nil}) == nil {
+                        if person.id != user.id {
                             Button {
                                 print(person.id)
                                 chatVM.addChat(users: [user, person])
@@ -66,7 +74,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                }.searchable(text: $searchInput)
+                }
             }
         }
         
