@@ -43,7 +43,7 @@ struct ContentView: View {
                         }
                     }
             }
-            .searchable(text: $searchInput)
+//            .searchable(text: $searchInput)
             .navigationTitle("ChatApp")
                 .listStyle(.plain)
                 .toolbar {
