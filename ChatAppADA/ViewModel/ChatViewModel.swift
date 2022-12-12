@@ -117,6 +117,10 @@ class ChatViewModel : ObservableObject {
         }
     }
     
+    func deleteItem(indexSet: IndexSet) {
+        chats.remove(atOffsets: indexSet)
+    }
+    
     // This will create a new chat and when a message is written inside create automatically the subcollection "messages" on firebase
     func addNewChat(){
         do{
