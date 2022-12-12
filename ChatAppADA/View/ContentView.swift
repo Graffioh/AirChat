@@ -13,7 +13,7 @@ struct ContentView: View {
     @State private var searchInput = ""
     @State var showingModal = false
 
-    @State var user : User = User(id: "E850B250-D341-4ABF-8370-D33B480CE506", fullName: "Umberto Breglia", picked: true)
+    @State var user : User = User(id: "E850B250-D341-4ABF-8370-D33B480CE506", fullName: "Umberto Breglia", picked: true, imageURL : URL(string : "https://dl.airtable.com/.attachments/d8e8bbbd3ed9796344e4d08b9a23b3d3/7f9e4585/UmbertoBreglia.png")!)
    
     // Filter based on search input
     var filteredPeople : [User] {
@@ -33,7 +33,7 @@ struct ContentView: View {
                         NavigationLink{
                             ChatView(chatVM: ChatViewModel(), sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
                         } label: {
-                            SingleUserRow(name: receiver.fullName)
+                            SingleUserRow(user: receiver)
                         }
                     }
                 }.onDelete { indexSet in // Delete chat

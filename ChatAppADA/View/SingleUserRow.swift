@@ -9,15 +9,15 @@ import SwiftUI
 
 struct SingleUserRow: View {
     
-    var name: String
+    var user: User
     var body: some View {
         HStack {
-            Image("image1")
+            AsyncImage(url: user.imageURL)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
                 .cornerRadius(50)
-            Text(name)
+            Text(user.fullName)
                 .font(.headline)
             Spacer()
         }
