@@ -39,12 +39,12 @@ struct ContentView: View {
                             SingleUserRow(user: receiver)
                         }
                     }
-                }.onDelete { indexSet in // Delete chat
-                        indexSet.forEach { (i) in
-                            chatVM.deleteAllChatMessages(chatId: chatVM.chats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted (its written in the documentation)
-                            chatVM.deleteChat(chatId: chatVM.chats[i].id)
-                        }
-                    }
+//                }.onDelete { indexSet in // Delete chat
+//                        indexSet.forEach { (i) in
+//                            chatVM.deleteAllChatMessages(chatId: chatVM.chats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted (its written in the documentation)
+//                            chatVM.deleteChat(chatId: chatVM.chats[i].id)
+//                        }
+//                    }
             }
 //            .searchable(text: $searchInput)
             .navigationTitle("ChatApp")
