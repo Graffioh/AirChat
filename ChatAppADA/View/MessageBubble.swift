@@ -20,7 +20,11 @@ struct MessageBubble: View {
         VStack(alignment: (sender != message.sender) ? .leading : .trailing) {
             HStack {
                 Text(message.body)
-                    .onLongPressGesture(minimumDuration: 1.5, perform: {chatVM.deleteMessage(chatId: chatId, msgId: message.id)})
+                    .onLongPressGesture(minimumDuration: 1.5, perform: {
+                        if message.sender == sender {
+                            chatVM.deleteMessage(chatId: chatId, msgId: message.id)
+                        }
+                    })
                     .foregroundColor(.white)
                     .padding()
                     .background((sender != message.sender) ? Color.secondary : .blue)

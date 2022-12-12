@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  chat-app-ada
 //
-//  Created by Alessandro Vinaccia on 07/12/22.
+//  Created by Alessandro i on 07/12/22.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var searchInput = ""
     @State var showingModal = false
     
-    
+    // Filter based on search input
     var filteredPeople : [User] {
         if searchInput == "" { return dbManager.users}
         return dbManager.users.filter {
@@ -25,28 +25,35 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            
             VStack(alignment: .center){
-                ForEach(chatVM.chats, id : \.id) { chat in
-                    if chat.users.first(where: {$0.id == user.id}) != nil{
-                        let receiver = chat.users.first(where : { $0.id != self.user.id })!
-                        NavigationLink{
-                            ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
-                        } label: {
-                            SingleUserRow(name: receiver.fullName)
+                List{
+                    ForEach(chatVM.chats, id: \.id) { chat in
+                        // This basically filter chats based on who is the user that is using the app, so everyone have "personal" chats.
+                        if chat.users.first(where: {$0.id == user.id}) != nil{
+                            let receiver: User = chat.users.first(where : { $0.id != self.user.id })!
+                            NavigationLink{
+                                ChatView(sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
+                            } label: {
+                                SingleUserRow(name: receiver.fullName)
+                            }
+                        }
+                    }.onDelete { indexSet in // Delete chat
+                        indexSet.forEach { (i) in
+                            chatVM.deleteAllChatMessages(chatId: chatVM.chats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted (its written in the documentation)
+                            chatVM.deleteChat(chatId: chatVM.chats[i].id)
                         }
                     }
-                }
+                }.scrollContentBackground(.hidden)
+                    
             }.navigationTitle("ChatApp")
                 .toolbar {
-                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
-                        Button {
-                            
-                        } label: {
-                            Text("Edit")
-                        }
-                        
-                    }
+//                    ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
+//                        Button {
+//
+//                        } label: {
+//                            Text("Edit")
+//                        }
+//                    }
                     ToolbarItemGroup(placement : ToolbarItemPlacement.navigationBarTrailing){
                         Button {
                             self.showingModal = true
@@ -56,6 +63,8 @@ struct ContentView: View {
                     }
                 }.sheet(isPresented: $showingModal) {
                     List(filteredPeople){ person in
+                        // If a user is already picked for a chat, it wont be displayed anymore in the modal view.
+                        if chatVM.chats.first(where: {$0.users.first(where: {$0.id == person.id}) != nil}) == nil {
                         if person.id != user.id {
                             Button {
                                 print(person.id)
@@ -65,14 +74,24 @@ struct ContentView: View {
                                 SingleUserRow(name: person.fullName)
                             }
                         }
-                        }.searchable(text: $searchInput)
+                    }
                 }
+            }
         }
+        
     }
+    
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             ContentView()
         }
+    }
+}
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }

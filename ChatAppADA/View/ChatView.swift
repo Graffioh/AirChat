@@ -18,6 +18,7 @@ struct ChatView: View {
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
+                // Message list
                 ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
                     MessageBubble(message: chatMessage, sender : sender, chatId: chatId).environmentObject(chatVM)
                 }
@@ -25,8 +26,6 @@ struct ChatView: View {
             }.toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        //Button("Reset", action: prova)
-                        
                         Button {
                             chatVM.deleteAllChatMessages(chatId: chatId)
                         } label: {
@@ -35,8 +34,7 @@ struct ChatView: View {
                                 Text("Delete all messages")
                             }
                         }
-
-                    }                                                          label: {
+                    } label: {
                         Label("Add Item", systemImage: "ellipsis.circle")
                     }
                 }
