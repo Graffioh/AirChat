@@ -12,22 +12,18 @@ struct SingleUserRow: View {
     var user: User
     var body: some View {
         HStack {
-            AsyncImage(url: user.imageURL)
-                .resizable()
+            AsyncImage(url: user.imageURL){ image in
+                image.resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
                 .cornerRadius(50)
+            } placeholder: {
+                ProgressView()
+            }
             Text(user.fullName)
                 .font(.headline)
             Spacer()
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-      SingleUserRow(name: "Gianmichele")
-    }
-}
-
 
