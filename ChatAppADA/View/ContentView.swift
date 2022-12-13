@@ -42,7 +42,7 @@ struct ContentView: View {
                     }
             }
 //            .searchable(text: $searchInput)
-            .navigationTitle("ChatApp")
+            .navigationTitle("Air Chat")
                 .listStyle(.plain)
                 .toolbar {
                     ToolbarItemGroup(placement: ToolbarItemPlacement.navigationBarLeading){
