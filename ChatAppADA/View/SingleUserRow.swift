@@ -7,14 +7,12 @@ struct SingleUserRow: View {
     var user: User
     var body: some View {
         HStack {
-            AsyncImage(url: user.imageURL){ image in
-                image.resizable()
+          
+            Image(systemName: "person.fill").resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
                 .cornerRadius(50)
-            } placeholder: {
-                ProgressView()
-            }
+            
             Text(user.fullName)
                 .font(.headline)
             Spacer()
