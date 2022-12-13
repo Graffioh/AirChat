@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct ContentView: View {    
@@ -20,18 +19,20 @@ struct ContentView: View {
         }
     }
     
+    
     var body: some View {
+        let filteredChats : [ChatTest] = chatVM.chats.filter { chat in
+            return chat.users.contains(where: {$0.id == user.id})
+        }
+        
         NavigationStack {
             List {
-                ForEach(chatVM.chats, id : \.id) { chat in
-                // This basically filter chats based on who is the user that is using the app, so everyone have "personal" chats.
-                    if chat.users.first(where: {$0.id == user.id}) != nil{
-                        let receiver = chat.users.first(where : { $0.id != self.user.id })!
-                        NavigationLink{
-                            ChatView(chatVM: ChatViewModel(), sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
-                        } label: {
-                            SingleUserRow(user: receiver)
-                        }
+                ForEach(filteredChats, id : \.id) { chat in
+                    let receiver = chat.users.first(where : { $0.id != self.user.id })!
+                    NavigationLink{
+                        ChatView(chatVM: ChatViewModel(), sender: self.user.id, receiver: receiver, chatId: chat.id).environmentObject(chatVM)
+                    } label: {
+                        SingleUserRow(user: receiver)
                     }
                 }.onDelete { indexSet in // Delete chat
                         indexSet.forEach { (i) in
@@ -66,10 +67,10 @@ struct ContentView: View {
                             // (for debug)
                             //if chatVM.chats.contains(where: {$0.users.first(where: {$0.id == person.id}) != nil}) {
                             
-                            // If a user is already picked for a chat, it wont be displayed anymore in the modal view. (Work in progress)
-                            if chatVM.chats.first(where: {$0.users.first(where: {$0.id == person.id}) != nil}) == nil {
-                                // You will not be displayed in the modal view.
-                                    if person.id != user.id {
+                            // You will not be displayed in the modal view.
+                            if person.id != user.id {
+                                // If a user is already picked for a chat, it wont be displayed anymore in the modal view.
+                                if !filteredChats.contains(where: {$0.users.contains(where: {$0.id == person.id})}){
                                         Button {
                                             print(person.id)
                                             chatVM.addChat(users: [user, person])
