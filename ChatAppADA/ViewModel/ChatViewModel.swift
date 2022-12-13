@@ -1,9 +1,3 @@
-//
-//  ChatMessageViewModel.swift
-//  chat-app-ada
-//
-//  Created by Umberto Breglia on 08/12/22.
-//
 
 import Foundation
 import SwiftUI

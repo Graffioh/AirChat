@@ -1,9 +1,3 @@
-//
-//  CameraRowView.swift
-//  ChatAppADA
-//
-//  Created by Giovanni Michele on 10/12/22.
-//
 
 import SwiftUI
 
