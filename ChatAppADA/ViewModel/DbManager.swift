@@ -4,14 +4,15 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import SwiftUI
 
+
 class DbManager : ObservableObject {
-    @Published private(set) var messages : [Message] = []
     @Published private(set) var users : [User] = []
     
     let db  = Firestore.firestore()
     
     init(){
         self.populate()
+        
     }
     
     func populate() {

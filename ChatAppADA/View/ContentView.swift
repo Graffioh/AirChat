@@ -6,10 +6,10 @@ struct ContentView: View {
     @State private var searchInput = ""
     @State var showingModal = false
 
-    @State var user : User = User(id: "F9E12B4B-E5E8-485F-B741-E9BBA32BC42B", fullName: "Umberto Breglia", picked: true, imageURL : URL(string : "https://dl.airtable.com/.attachments/d8e8bbbd3ed9796344e4d08b9a23b3d3/7f9e4585/UmbertoBreglia.png")!)
-    //@State var user : User = User(id: "7FD1A842-EA1D-4D9D-BCF2-5F19ADEA0E1C", fullName: "Alessandro Vinaccia", picked: true, imageURL : URL(string : "https://dl.airtable.com/.attachments/d8e8bbbd3ed9796344e4d08b9a23b3d3/7f9e4585/UmbertoBreglia.png")!)
-    //@State var user : User = User(id: "91F938F0-89C7-47DF-A8F7-D12ED79C9BA2", fullName: "Giovanni Michele Napoli", picked: true, imageURL : URL(string : "https://dl.airtable.com/.attachments/d8e8bbbd3ed9796344e4d08b9a23b3d3/7f9e4585/UmbertoBreglia.png")!)
-//    @State var user : User = User(id: "33361B3E-8914-433F-B1C7-F4A19D59EF98", fullName: "Danilo Cotarella", picked: true, imageURL : URL(string : "https://dl.airtable.com/.attachments/d8e8bbbd3ed9796344e4d08b9a23b3d3/7f9e4585/UmbertoBreglia.png")!)
+    //@State var user : User = User(id: "F9E12B4B-E5E8-485F-B741-E9BBA32BC42B", fullName: "Umberto Breglia", picked: true)
+    @State var user : User = User(id: "7FD1A842-EA1D-4D9D-BCF2-5F19ADEA0E1C", fullName: "Alessandro Vinaccia", picked: true)
+    //@State var user : User = User(id: "91F938F0-89C7-47DF-A8F7-D12ED79C9BA2", fullName: "Giovanni Michele Napoli", picked: true)
+    //@State var user : User = User(id: "33361B3E-8914-433F-B1C7-F4A19D59EF98", fullName: "Danilo Cotarella", picked: true)
    
     // Filtered people based on search input
     var filteredPeople : [User] {
@@ -18,7 +18,6 @@ struct ContentView: View {
             $0.fullName.lowercased().contains(searchInput.lowercased())
         }
     }
-    
     
     var body: some View {
         let filteredChats : [ChatTest] = chatVM.chats.filter { chat in
@@ -51,7 +50,6 @@ struct ContentView: View {
                         } label: {
                             EditButton()
                         }
-                        
                     }
 
                     ToolbarItemGroup(placement : ToolbarItemPlacement.navigationBarTrailing){
@@ -62,7 +60,7 @@ struct ContentView: View {
                         }
                     }
                 }.sheet(isPresented: $showingModal) {
-                    NavigationStack {
+                    NavigationStack { //file to split up the view
                         List(filteredPeople){ person in
                             // (for debug)
                             //if chatVM.chats.contains(where: {$0.users.first(where: {$0.id == person.id}) != nil}) {
@@ -87,8 +85,6 @@ struct ContentView: View {
                         .navigationBarTitleDisplayMode(.inline)
                     }
                 }
-        
-        
     }
     
     
