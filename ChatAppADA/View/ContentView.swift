@@ -6,10 +6,10 @@ struct ContentView: View {
     @State private var searchInput = ""
     @State var showingModal = false
 
-    //@State var user : User = User(id: "F9E12B4B-E5E8-485F-B741-E9BBA32BC42B", fullName: "Umberto Breglia", picked: true)
-    @State var user : User = User(id: "7FD1A842-EA1D-4D9D-BCF2-5F19ADEA0E1C", fullName: "Alessandro Vinaccia", picked: true)
-    //@State var user : User = User(id: "91F938F0-89C7-47DF-A8F7-D12ED79C9BA2", fullName: "Giovanni Michele Napoli", picked: true)
-    //@State var user : User = User(id: "33361B3E-8914-433F-B1C7-F4A19D59EF98", fullName: "Danilo Cotarella", picked: true)
+    @State var user : User = User(id: "E066F003-2513-4032-9856-451C597F871B", fullName: "Umberto Breglia", picked: true)
+    //@State var user : User = User(id: "61BB0FD5-555A-4198-855E-EE8D336693FA", fullName: "Alessandro Vinaccia", picked: true)
+    //@State var user : User = User(id: "D987DF1A-BBE1-4738-BC32-2EFC239D60AF", fullName: "Giovanni Michele Napoli", picked: true)
+    //@State var user : User = User(id: "27F77A76-3153-441A-A254-4713F132AD81", fullName: "Danilo Cotarella", picked: true)
    
     // Filtered people based on search input
     var filteredPeople : [User] {
