@@ -1,9 +1,3 @@
-//
-//  MessageRowView.swift
-//  chat-app-ada
-//
-//  Created by Giovanni Michele on 09/12/22.
-//
 
 import SwiftUI
 
@@ -21,6 +15,7 @@ struct MessageBubble: View {
             HStack {
                 Text(message.body)
                     .onLongPressGesture(minimumDuration: 1.5, perform: {
+                        // When the message is pressed for 1.5 seconds, then delete that message.
                         if message.sender == sender {
                             chatVM.deleteMessage(chatId: chatId, msgId: message.id)
                         }

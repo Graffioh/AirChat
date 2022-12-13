@@ -1,9 +1,3 @@
-//
-//  MessageView.swift
-//  chat-app-ada
-//
-//  Created by Giovanni Michele on 08/12/22.
-//
 
 import SwiftUI
 
@@ -18,14 +12,14 @@ struct ChatView: View {
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
-                // Message list
+                // Messages shown in a bubble.
                 ForEach(chatVM.chatMessages, id : \.id) { chatMessage in
                     MessageBubble(chatVM: ChatViewModel(), message: chatMessage, sender : sender, chatId: chatId)
                 }
                 .padding()
             }.toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
+                    Menu { // Context menu
                         Button {
                             chatVM.deleteAllChatMessages(chatId: chatId)
                         } label: {
@@ -37,7 +31,7 @@ struct ChatView: View {
                     }
                 label: {
                     Label("Add Item", systemImage: "ellipsis.circle")
-                }
+                    }
                 }
             })
             .padding(.horizontal)
@@ -59,7 +53,8 @@ struct ChatView: View {
             .padding(.trailing)
             .padding(.vertical)
         }.onAppear{
-            chatVM.getChatMessages(chatId: chatId) // On appear get specific chat messages
+            // On appear get specific chat messages
+            chatVM.getChatMessages(chatId: chatId)
             print("chat id: \(chatId)")
         }
         .navigationTitle(receiver.fullName)
