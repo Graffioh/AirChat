@@ -10,6 +10,7 @@
 		0623DAE92948932200390346 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623DAE82948932200390346 /* CameraViewModel.swift */; };
 		0623DAEB2948935100390346 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623DAEA2948935100390346 /* CameraPreview.swift */; };
 		0623DAED294893F400390346 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0623DAEC294893F400390346 /* CustomCameraView.swift */; };
+		0643404B2949DE4400AB4447 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0643404A2949DE4400AB4447 /* OnboardingView.swift */; };
 		064462E7294334F700B59C61 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064462E6294334F700B59C61 /* UserModel.swift */; };
 		064462E92943350000B59C61 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064462E8294334FF00B59C61 /* ChatModel.swift */; };
 		064462EB2943350600B59C61 /* DbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064462EA2943350600B59C61 /* DbManager.swift */; };
@@ -33,6 +34,7 @@
 		0623DAE82948932200390346 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		0623DAEA2948935100390346 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		0623DAEC294893F400390346 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
+		0643404A2949DE4400AB4447 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		064462E6294334F700B59C61 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		064462E8294334FF00B59C61 /* ChatModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		064462EA2943350600B59C61 /* DbManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbManager.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				7D0342E72944E18E00EFF69C /* TextFieldRowView.swift */,
 				7D3D786929448E5300F34035 /* CameraView.swift */,
 				0623DAEC294893F400390346 /* CustomCameraView.swift */,
+				0643404A2949DE4400AB4447 /* OnboardingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				064462EF2943350E00B59C61 /* ChatView.swift in Sources */,
 				064462E92943350000B59C61 /* ChatModel.swift in Sources */,
 				064462F12943351100B59C61 /* MessageBubble.swift in Sources */,
+				0643404B2949DE4400AB4447 /* OnboardingView.swift in Sources */,
 				064462F32943351500B59C61 /* SingleUserRow.swift in Sources */,
 				0623DAE92948932200390346 /* CameraViewModel.swift in Sources */,
 			);
