@@ -1,36 +1,37 @@
 
 import SwiftUI
- 
+
 //MARK: Onboarding
 
 struct OnboardingView: View {
-
+    
     @Binding var shouldShowOnboarding: Bool
     @Binding var userSelected: User
-    
+    @Binding var userSelectedData: Data
     var body: some View {
         TabView {
             PageView (imageName: "message.circle.fill",
                       title: "Messaging System ",
                       subtitle: "New at the Academy? Find your new friends on Air Chat",
                       showDismissButton: false ,
-            shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected)
-                          .background(Color.blue)
-        
+                      shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected, userSelectedData: $userSelectedData)
+            .background(Color.blue)
+            
             PageView (imageName: "bell",
                       title: "Notification ",
                       subtitle: "Do we have notifications(?)",
                       showDismissButton: false ,
-                      shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected)
-               .background(Color.red)
-        
+                      shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected, userSelectedData: $userSelectedData)
+            .background(Color.red)
+            
             PageView ( imageName : "hand.thumbsup",
-                      title: "Get Started ",
+                       title: "Get Started ",
                        subtitle: "Select your Name and Surname and come meet your new friends!",
                        showDismissButton: true ,
-                       shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected)               .background(Color.green)
-        
-           }
+                       shouldShowOnboarding:$shouldShowOnboarding, userSelected: $userSelected, userSelectedData: $userSelectedData)
+            .background(Color.green)
+            
+        }
         .tabViewStyle( PageTabViewStyle())
     }
 }
@@ -42,6 +43,8 @@ struct PageView: View {
     let showDismissButton: Bool
     @Binding var shouldShowOnboarding: Bool
     @Binding var userSelected: User
+    
+    @Binding var userSelectedData: Data
     
     @EnvironmentObject var dbManager: DbManager
     
@@ -61,13 +64,14 @@ struct PageView: View {
                 
                 Button {
                     shouldShowOnboarding.toggle()
+                    
+                    // When closed save the user in app storage
+                    guard let userSelectedData = try? JSONEncoder().encode(userSelected) else {return}
+                    self.userSelectedData = userSelectedData
                 } label: {
-                    Text("Close")
-                }
+                    Text("Done")
+                }.padding()
             }
-            
-            
-
         }
     }
 }
