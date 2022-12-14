@@ -12,24 +12,37 @@ struct TextfieldRowView: View {
     @State private var selectedImage1: UIImage?
     @State private var isImagePickerDisplay1 = false
     
+    //@StateObject var cameraVM = CameraViewModel()
+    
     var body: some View {
         HStack {
-            Button {
-                self.sourceType1 = .photoLibrary
-                self.isImagePickerDisplay1.toggle()
+            NavigationLink {
+                CustomCameraView()
             } label: {
                 Image(systemName: "camera.fill").bold()
-                    .foregroundColor(.white)
-                    .padding(8)
-                    .background(Color.secondary)
-                    .cornerRadius(50)
+                   .foregroundColor(.white)
+                   .padding(8)
+                   .background(Color.secondary)
+                   .cornerRadius(50)
             }
-            .fullScreenCover(isPresented: self.$isImagePickerDisplay1) {
-                ZStack {
-                    Color.black.ignoresSafeArea()
-                    ImagePickerView(selectedImage: self.$selectedImage1, sourceType: self.sourceType1)
-                }
-            }
+
+//            Button {
+//                self.sourceType1 = .photoLibrary
+//                self.isImagePickerDisplay1.toggle()
+//
+//            } label: {
+//                Image(systemName: "camera.fill").bold()
+//                    .foregroundColor(.white)
+//                    .padding(8)
+//                    .background(Color.secondary)
+//                    .cornerRadius(50)
+//            }
+//            .fullScreenCover(isPresented: self.$isImagePickerDisplay1) {
+//                ZStack {
+//                    Color.black.ignoresSafeArea()
+//                    ImagePickerView(selectedImage: self.$selectedImage1, sourceType: self.sourceType1)
+//                }
+//            }
             
  
             TextField("Write message", text: $input)

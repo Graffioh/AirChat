@@ -1,51 +1,43 @@
-
+import Foundation
+import UIKit
 import SwiftUI
 
-struct CameraView: View {
+struct CameraView: UIViewControllerRepresentable {
     
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var selectedImage: UIImage?
-    @State private var isImagePickerDisplay = false
+    typealias UIViewControllerType = UIImagePickerController
     
-    var body: some View {
-        NavigationView {
-            VStack {
-                
-                if selectedImage != nil {
-                    Image(uiImage: selectedImage!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .frame(width: 300, height: 300)
-                } else {
-                    Image(systemName: "snow")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .frame(width: 300, height: 300)
-                }
-                
-                Button("fotocamera") {
-                    self.sourceType = .camera
-                    self.isImagePickerDisplay.toggle()
-                }.padding()
-                
-                Button("galleria") {
-                    self.sourceType = .photoLibrary
-                    self.isImagePickerDisplay.toggle()
-                }.padding()
-            }
-            .navigationBarTitle("Demo")
-            .fullScreenCover(isPresented: self.$isImagePickerDisplay) {
-                
-                ZStack {
-                    Color.primary.ignoresSafeArea()
-                    ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
-                }
-            }
-            
-        }
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        let viewController = UIViewControllerType()
+        viewController.delegate = context.coordinator
+        viewController.sourceType = .camera
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+    
+    func makeCoordinator() -> CameraView.Coordinator {
+        return Coordinator(self)
     }
 }
 
-
+extension CameraView {
+    class Coordinator : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        var parent: CameraView
+        
+        init(_ parent: CameraView) {
+            self.parent = parent
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            print("Cancel pressed")
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+        }
+    }
+}
