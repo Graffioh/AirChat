@@ -7,7 +7,6 @@ struct SingleUserRow: View {
     var user: User
     var body: some View {
         HStack {
-          
             Image(systemName: "person.fill").resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50)
