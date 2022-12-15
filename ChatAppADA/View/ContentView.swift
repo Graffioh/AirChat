@@ -70,10 +70,13 @@ struct ContentView: View {
                     }
                 }
             }.sheet(isPresented: $showingModal) {
-                UserList(showingModal: $showingModal)
-                
+//                UserList(showingModal: $showingModal)
+                UserList(showingModal: $showingModal, user : user)
             }
         }
-        .fullScreenCover(isPresented:  $shouldShowOnboarding,content: { OnboardingView(shouldShowOnboarding: $shouldShowOnboarding, userSelected: $user, userSelectedData: $userSelectedData).environmentObject(dbManager)})
+        .fullScreenCover(isPresented:  $shouldShowOnboarding, content: {
+            OnboardingView(shouldShowOnboarding: $shouldShowOnboarding,
+                                userSelected: $user,
+                                userSelectedData: $userSelectedData).environmentObject(dbManager)})
     }
 }

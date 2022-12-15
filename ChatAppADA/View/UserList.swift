@@ -15,7 +15,7 @@ struct UserList: View {
     @Binding var showingModal: Bool
     @State var searchable = ""
     @StateObject var chatVM = ChatViewModel()
-    @State var user : User = User(id: "E066F003-2513-4032-9856-451C597F871B", fullName: "Umberto Breglia", picked: true)
+    var user : User
     
     var filteredPeople : [User] {
         if searchable == "" { return
@@ -70,9 +70,4 @@ struct UserList: View {
     }
 }
 
-struct UserList_Previews: PreviewProvider {
-    static var previews: some View {
-        UserList(showingModal: .constant(true))
-    }
-}
 
