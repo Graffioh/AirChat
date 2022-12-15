@@ -41,8 +41,8 @@ struct ContentView: View {
                     }
                 }.onDelete { indexSet in // Delete chat
                     indexSet.forEach { (i) in
-                        chatVM.deleteAllChatMessages(chatId: chatVM.chats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted
-                        chatVM.deleteChat(chatId: chatVM.chats[i].id)
+                        chatVM.deleteAllChatMessages(chatId: filteredChats[i].id) // This is needed for firebase, because otherwise the subcollection will not be deleted
+                        chatVM.deleteChat(chatId: filteredChats[i].id)
                     }
                 }
             }.onAppear{ // On appear load user selected (from app storage)
