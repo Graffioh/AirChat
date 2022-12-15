@@ -70,30 +70,8 @@ struct ContentView: View {
                     }
                 }
             }.sheet(isPresented: $showingModal) {
-                NavigationStack {
-                    List(filteredPeople){ person in
-                        // (for debug)
-                        //if chatVM.chats.contains(where: {$0.users.first(where: {$0.id == person.id}) != nil}) {
-                        
-                        // You will not be displayed in the modal view.
-                        if person.id != user.id {
-                            // If a user is already picked for a chat, it wont be displayed anymore in the modal view.
-                            if !filteredChats.contains(where: {$0.users.contains(where: {$0.id == person.id})}){
-                                Button {
-                                    print(person.id)
-                                    chatVM.addChat(users: [user, person])
-                                    self.showingModal = false
-                                } label: {
-                                    SingleUserRow(user : person)
-                                }
-                            }
-                        }
-                    }
-                }
-                .searchable(text: $searchInput)
-                .listStyle(.plain)
-                .navigationTitle("Contacts")
-                .navigationBarTitleDisplayMode(.inline)
+                UserList(showingModal: $showingModal)
+                
             }
         }
         .fullScreenCover(isPresented:  $shouldShowOnboarding,content: { OnboardingView(shouldShowOnboarding: $shouldShowOnboarding, userSelected: $user, userSelectedData: $userSelectedData).environmentObject(dbManager)})

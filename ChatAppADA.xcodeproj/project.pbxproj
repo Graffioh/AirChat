@@ -26,6 +26,7 @@
 		0694FD74294334400056CE17 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0694FD73294334400056CE17 /* GoogleService-Info.plist */; };
 		0694FD76294334C10056CE17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0694FD75294334C10056CE17 /* ContentView.swift */; };
 		7D0342E82944E18E00EFF69C /* TextFieldRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0342E72944E18E00EFF69C /* TextFieldRowView.swift */; };
+		7D2B8AF9294B1865001ACFE2 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2B8AF8294B1865001ACFE2 /* UserList.swift */; };
 		7D3D786729448B2800F34035 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786629448B2800F34035 /* CameraModel.swift */; };
 		7D3D786A29448E5300F34035 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D786929448E5300F34035 /* CameraView.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		0694FD73294334400056CE17 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0694FD75294334C10056CE17 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D0342E72944E18E00EFF69C /* TextFieldRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRowView.swift; sourceTree = "<group>"; };
+		7D2B8AF8294B1865001ACFE2 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		7D3D786629448B2800F34035 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		7D3D786829448D9300F34035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7D3D786929448E5300F34035 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				0694FD75294334C10056CE17 /* ContentView.swift */,
+				7D2B8AF8294B1865001ACFE2 /* UserList.swift */,
 				064462EE2943350E00B59C61 /* ChatView.swift */,
 				064462F02943351100B59C61 /* MessageBubble.swift */,
 				064462F22943351400B59C61 /* SingleUserRow.swift */,
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D3D786729448B2800F34035 /* CameraModel.swift in Sources */,
+				7D2B8AF9294B1865001ACFE2 /* UserList.swift in Sources */,
 				064462EB2943350600B59C61 /* DbManager.swift in Sources */,
 				064462E7294334F700B59C61 /* UserModel.swift in Sources */,
 				0623DAEB2948935100390346 /* CameraPreview.swift in Sources */,
