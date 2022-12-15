@@ -57,15 +57,17 @@ struct PageView: View {
             if showDismissButton {
                 Picker("Please select a user", selection: $userSelected) {
                     ForEach(dbManager.users, id: \.self){ user in
-                        Text(user.fullName)
+                        if !user.picked {
+                            Text(user.fullName)
+                        }
                     }
                 }
                 Text("You selected: \(userSelected.fullName)")
                 
                 Button {
                     shouldShowOnboarding.toggle()
-                    
                     // When closed save the user in app storage
+                    dbManager.pickUser(id: userSelected.id)
                     guard let userSelectedData = try? JSONEncoder().encode(userSelected) else {return}
                     self.userSelectedData = userSelectedData
                 } label: {
