@@ -5,7 +5,7 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 
-class DbManager : ObservableObject {
+class UserViewModel : ObservableObject {
     @Published private(set) var users : [User] = []
     
     let db  = Firestore.firestore()

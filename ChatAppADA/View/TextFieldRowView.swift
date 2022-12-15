@@ -6,7 +6,7 @@ import SwiftUI
 struct TextfieldRowView: View {
     
     @Binding var input: String
-    @StateObject var dbManager = DbManager()
+    @StateObject var dbManager = UserViewModel()
     
     @State private var sourceType1: UIImagePickerController.SourceType = .camera
     @State private var selectedImage1: UIImage?

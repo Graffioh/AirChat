@@ -44,7 +44,7 @@ struct PageView: View {
     
     @Binding var userSelectedData: Data
     
-    @EnvironmentObject var dbManager: DbManager
+    @EnvironmentObject var dbManager: UserViewModel
     
     var body: some View {
         VStack {

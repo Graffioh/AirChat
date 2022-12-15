@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {    
-    @StateObject var dbManager = DbManager()
+    @StateObject var userVM = UserViewModel()
     @StateObject var chatVM = ChatViewModel()
     @State private var searchInput = ""
     @State var showingModal = false
@@ -18,8 +18,8 @@ struct ContentView: View {
     
     // Filtered people based on search input
     var filteredPeople : [User] {
-        if searchInput == "" { return dbManager.users}
-        return dbManager.users.filter {
+        if searchInput == "" { return userVM.users}
+        return userVM.users.filter {
             $0.fullName.lowercased().contains(searchInput.lowercased())
         }
     }
@@ -77,6 +77,6 @@ struct ContentView: View {
         .fullScreenCover(isPresented:  $shouldShowOnboarding, content: {
             OnboardingView(shouldShowOnboarding: $shouldShowOnboarding,
                                 userSelected: $user,
-                                userSelectedData: $userSelectedData).environmentObject(dbManager)})
+                                userSelectedData: $userSelectedData).environmentObject(userVM)})
     }
 }

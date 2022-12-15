@@ -11,7 +11,7 @@ import SwiftUI
 struct UserList: View {
     
     @Environment(\.dismiss) private var dismiss
-    @StateObject var dbManager = DbManager()
+    @StateObject var dbManager = UserViewModel()
     @Binding var showingModal: Bool
     @State var searchable = ""
     @StateObject var chatVM = ChatViewModel()
