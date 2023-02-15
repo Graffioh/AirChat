@@ -2,7 +2,7 @@
 //  chat_app_adaApp.swift
 //  chat-app-ada
 //
-//  Created by Alessandro Vinaccia on 07/12/22.
+//  Created by Fake British Guys on 07/12/22.
 //
 
 import SwiftUI

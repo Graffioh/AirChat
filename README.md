@@ -6,4 +6,4 @@ Video:
 https://user-images.githubusercontent.com/93008765/208233889-f97c9988-271c-4910-8850-21e87aca4446.mp4
 
 
-Powered by [Firebase](https://firebase.google.com/), soon on [CloudKit](https://developer.apple.com/icloud/cloudkit/).
+Powered by [Firebase](https://firebase.google.com/)
